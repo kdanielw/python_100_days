@@ -21,7 +21,6 @@ for i in range(number_of_circles):
     angle = i * (360 / number_of_circles)
     tim.setheading(angle)
     tim.color(random_color())    
-    tim.circle(200)
-    
+    tim.circle(200)    
     
 screen.exitonclick()
