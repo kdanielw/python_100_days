@@ -13,19 +13,25 @@ class Snake:
         self.create_snake()
         self.head = self.snake[0]
 
-    def create_snake(self):
-        square_dimensions = MOVE_DISTANCE
+    def create_snake(self):       
         x_cord = 0
         y_cord = 0
+        square_dimensions = MOVE_DISTANCE
 
         for _ in range(3):
-            new_segment = Turtle(shape="square")
-            new_segment.penup()
-            new_segment.color("white")
-            new_segment.goto(x = x_cord, y = y_cord)
-            x_cord -= square_dimensions
-            self.snake.append(new_segment)
+            self.add_segment((x_cord, y_cord))
+            x_cord -= square_dimensions            
         self.snake[0].color("red")
+    
+    def add_segment(self, position):        
+        new_segment = Turtle(shape="square")
+        new_segment.penup()
+        new_segment.color("white")
+        new_segment.goto(position)        
+        self.snake.append(new_segment)
+
+    def extend(self):
+        self.add_segment(self.snake[-1].position())
     
     def move(self):
         for seg_number in range(len(self.snake) - 1, 0, -1):
