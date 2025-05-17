@@ -25,5 +25,4 @@ class Ball(Turtle):
             new_angle = 180 - self.heading()
         else:
             new_angle = 360 - self.heading()
-            print(new_angle)
         self.setheading(new_angle)

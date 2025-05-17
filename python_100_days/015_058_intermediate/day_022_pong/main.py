@@ -6,12 +6,15 @@ import time
 
 SCREEN_LIMIT = 380
 SCREEN_DIMENSION = 800
+SPEED_INCREASE = 2
 
 def restart_game():
-    paddle_1.sety = 0
-    paddle_2.sety = 0
+    paddle_l.sety = 0
+    paddle_r.sety = 0
     ball.starter_angle()
     screen.update()
+    global speed
+    speed += SPEED_INCREASE
     time.sleep(2)
 
 screen = Screen()
@@ -21,27 +24,30 @@ screen.title("Pong")
 screen.tracer(0)
 
 scoreboard = Scoreboard()
-paddle_1 = Paddle()
-paddle_1.choose_player(1)
-paddle_2 = Paddle()
-paddle_2.choose_player(2)
+paddle_l = Paddle()
+paddle_l.choose_player("l")
+paddle_r = Paddle()
+paddle_r.choose_player("r")
 
 ball = Ball()
 
 screen.listen()
-screen.onkey(paddle_1.up, "Up")
-screen.onkey(paddle_1.down, "Down")
-screen.onkey(paddle_2.up, "w")
-screen.onkey(paddle_2.down, "s")
-
+screen.onkey(paddle_l.up, "w")
+screen.onkey(paddle_l.down, "s")
+screen.onkey(paddle_r.up, "Up")
+screen.onkey(paddle_r.down, "Down")
 
 time.sleep(3)
 
+wall_l = paddle_l.xcor() + 10
+wall_r = paddle_r.xcor() - 10
+
+speed = 10
 game_is_on = True
 while game_is_on:
     screen.update()
     time.sleep(0.1)
-    ball.forward(10)
+    ball.forward(speed)
 
     # Ball vertical collison
     if ball.ycor() >= SCREEN_LIMIT or ball.ycor() <= -SCREEN_LIMIT:
@@ -56,11 +62,7 @@ while game_is_on:
         restart_game()
 
     # Ball collision with paddle
-    for segment in range (len(paddle_1.segments)):
-        if ball.distance(paddle_1.segments[segment]) <= 20 or ball.distance(paddle_2.segments[segment]) <= 20:
-            ball.collision("horizontal")
-    
-
+    if (ball.distance(paddle_l) <= 50 and ball.xcor() < wall_l) or (ball.distance(paddle_r) <= 50 and ball.xcor() > wall_r):
+        ball.collision("horizontal")
         
-
 screen.exitonclick()

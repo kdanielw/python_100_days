@@ -1,7 +1,7 @@
 from turtle import Turtle
 ALIGNMENT = "center"
 FONT = ("Courier", 16, "normal")
-MAX_GOALS = 1
+MAX_GOALS = 3
 
 class Scoreboard(Turtle):
 
@@ -22,16 +22,14 @@ class Scoreboard(Turtle):
             self.score_p1 += 1
         elif player == 2:
             self.score_p2 += 1
-        self.write(f"PLAYER 1  {self.score_p1}  X  {self.score_p2}  PLAYER 2", align=ALIGNMENT, font=FONT)
+        self.write(f"PLAYER 1  ( {self.score_p1}  X  {self.score_p2} )  PLAYER 2", align=ALIGNMENT, font=FONT)
 
         if self.score_p1 == MAX_GOALS or self.score_p2 == MAX_GOALS:
-            self.game_over()
+            return self.game_over(player)
+        return True
 
-    def game_over(self):
+    def game_over(self, winner):
         self.goto(x=0, y=50)
-        if self.score_p1 == MAX_GOALS:
-            winner = "1"
-        else:
-            winner = "2"
         self.write(f"PLAYER {winner} WON!!!", align=ALIGNMENT, font=FONT)
         return False
+    
