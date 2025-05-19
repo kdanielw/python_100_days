@@ -9,10 +9,12 @@ class Scoreboard(Turtle):
         self.penup()
         self.color("white")
         self.goto(x = 0, y = 270)
-        self.hideturtle()        
-
+        self.hideturtle()
         self.score = -1
-        self.high_score = 0
+
+        with open("data.txt") as storage_highscore:
+            self.high_score = int(storage_highscore.read())
+        
         self.inscrease_score()
     
     def inscrease_score(self):
@@ -23,6 +25,8 @@ class Scoreboard(Turtle):
     def reset(self):
         if self.score > self.high_score:
             self.high_score = self.score
+            with open("data.txt", mode="w") as storage_highscore:
+                storage_highscore.write(str(self.high_score))
         self.score = -1
         self.inscrease_score()
 
