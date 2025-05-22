@@ -28,10 +28,10 @@ while score < len(all_states):
     answer_state = screen.textinput(title=f"{score}/{len(all_states)} States Corrects", prompt="Whats is another state's name? ").lower()
 
     if answer_state == "exit":
-        states_to_learn = []
-        for state in all_states:
-            if state not in guessed_states:
-                states_to_learn.append(state)
+        states_to_learn = [state for state in all_states if state not in guessed_states]
+        # for state in all_states:
+        #     if state not in guessed_states:
+        #         states_to_learn.append(state)
         new_data = pandas.DataFrame(states_to_learn)
         new_data.to_csv("states_to_learn.csv")
         break
@@ -53,4 +53,3 @@ while score < len(all_states):
             state_name.goto(position)
             state_name.write(state, align="center", font=FONT)
             score += 1
-
