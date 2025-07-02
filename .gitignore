@@ -3,3 +3,4 @@ poetry.lock
 *.pyc
 .python-version
 .sqlite
+token.txt
