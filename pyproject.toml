@@ -14,6 +14,7 @@ python-dotenv = "^1.1.0"
 requests = "^2.32.3"
 pywhatkit = "^5.4"
 requests-cache = "^1.2.1"
+spotipy = "^2.25.1"
 
 
 [build-system]
