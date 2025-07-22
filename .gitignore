@@ -4,3 +4,5 @@ poetry.lock
 .python-version
 .sqlite
 token.txt
+059_081_advanced/day_059_boostrap_blog/static/css/*
+059_081_advanced/day_059_boostrap_blog/static/js/*
