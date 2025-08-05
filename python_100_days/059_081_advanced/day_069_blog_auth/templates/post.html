@@ -1,3 +1,4 @@
+{% from "bootstrap5/form.html" import render_form %}
 {% include "header.html" %}
 
 <!-- Page Header-->
@@ -10,7 +11,7 @@
           <h2 class="subheading">{{ post.subtitle }}</h2>
           <span class="meta"
             >Posted by
-            <a href="#">{{ post.author }}</a>
+            <a href="#">{{ post.author.name }}</a>
             on {{ post.date }}
           </span>
         </div>
@@ -38,18 +39,22 @@
 
         <!-- Comments Area -->
         <!-- TODO: Add a CKEditor for commenting below -->
+        {{ ckeditor.load() }}
+        {{ render_form(form) }}
         <div class="comment">
           <!-- TODO: Show all the comments on a post -->
           <ul class="commentList">
+            {% for comment in post.comments: %}
             <li>
               <div class="commenterImage">
                 <img src="../static/assets/img/default-profile.jpg" />
               </div>
               <div class="commentText">
-                <p>Some comment</p>
-                <span class="date sub-text">comment author name</span>
+                <p>{{ comment.text|safe }}</p>
+                <span class="date sub-text">{{ comment.comment_author.name }}</span>
               </div>
             </li>
+            {% endfor %}
           </ul>
         </div>
       </div>

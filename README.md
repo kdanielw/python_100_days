@@ -1,2 +1,2 @@
 # Hello!
-This is my repository to 100 Daeys of Python challenge.
+This is my repository to 100 Days of Python challenge.
